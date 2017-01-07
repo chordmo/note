@@ -1,0 +1,34 @@
+Use Universal USB Installer to install CentOS 7.0 onto a USB Flash Drive. 
+
+Right click on This PC and click Manage. Create a partition by shrinking the main drive's volume. Use the partition for a new drive. Restart.
+
+Use F12 to go into Boot Options. Select USB Storage Device and proceed. Under manual partitioning, click on the minus to free the partition you just created.
+
+Now click on the + and add the following partitions:
+
+/home - 9000 MB
+/swap - 2000 MB
+/ - everything else (For me, 143.6 GB)
+
+For each of these partitions, make sure they are of type Standard and have file format: ext4
+
+Now, install CentOS 7, and reboot into CentOS. Once booted, open up a terminal. Type:
+
+sudo vim /boot/grub2/grub.cfg
+OR
+sudo gedit /boot/grub2/grub.cfg (gedit is more like notepad if you're unfamiliar with vim)
+
+Vim is a text editor. You can also use gedit, vim commands:
+i is to insert text
+esc is to exit insert mode
+:q is to quit vim
+:x is to quit and save vim
+
+Add the following to grub.cfg to create a menu entry for Windows 8:
+
+menuentry "Windows 8" {
+set root='(hd0, 2)'
+chainloader +1
+}
+
+Click on the drive from the file explorer to find out what sda number the storage of Windows is on. For me, since Windows 8 was on sda3, I knew that the boot drive for Windows was on 2 (the number above). Reboot and you have a Windows 8 entry.
