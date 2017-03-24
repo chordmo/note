@@ -1,0 +1,24 @@
+yum localinstall https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+yum -y install postgresql95-server postgresql95-contrib
+/usr/pgsql-9.5/bin/postgresql95-setup initdb
+service postgresql-9.5 start/stop/restart/reload
+sudo chkconfig postgresql-9.5 on
+su postgres
+psql
+ALTER USER postgres WITH PASSWORD 'postgres';
+\q
+su root 
+
+vi /var/lib/pgsql/9.5/data/postgresql.conf
+//将listen_addresses前的#去掉，并将 listen_addresses = 'localhost' 改成 listen_addresses = '*'；
+vi /var/lib/pgsql/9.5/data/pg_hba.conf
+//将IPv4区下的127.0.0.1/32修改为0.0.0.0/0； 将ident修改为md5 
+service postgresql-9.5 restart
+firewall-cmd --zone=public --add-port=5432/tcp --permanent
+firewall-cmd --zone=public --add-service=postgresql --permanent
+firewall-cmd --reload
+
+sudo adduser dbuser
+sudo su - postgres
+CREATE DATABASE testdb OWNER dbuser;
+GRANT ALL PRIVILEGES ON DATABASE testdb to dbuser;
