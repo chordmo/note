@@ -1,0 +1,35 @@
+1) service mysqld stop
+2) mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
+3) mysql -u root
+4) Setup new MySQL root user password,use mysql;
+select user,host,password from mysql.user;
+    +------+-----------+-------------------------------------------+
+    | user | host      | password                                  |
+    +------+-----------+-------------------------------------------+
+    | root | localhost | *CF1E6A25C954B638A451D6|
+    | root | centos64  |                                           |
+    | root | 127.0.0.1 |                                           |
+    |      | localhost |                                           |
+    |      | centos64  |                                           |
+    +------+-----------+-------------------------------------------+
+    
+update mysql.user set password=PASSWORD("***********") where User='root';
+
+select user,host,password from mysql.user;
+    +------+-----------+-------------------------------------------+
+    | user | host      | password                                  |
+    +------+-----------+-------------------------------------------+
+    | root | localhost | *CF1E6A25C954B638A451D6 |
+    | root | centos64  | *CF1E6A25C954B638A451D6|
+    | root | 127.0.0.1 | *CF1E6A25C954B638A451D6|
+    |      | localhost |                                           |
+    |      | centos64  |                                           |
+    +------+-----------+-------------------------------------------+
+
+flush privileges;
+quit
+
+5) Stop MySQL Server: service mysqld stop
+
+6) Start MySQL server and test it: 
+service mysqld start

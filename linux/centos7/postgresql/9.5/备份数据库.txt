@@ -2,4 +2,4 @@
 pg_dump -U dbuser  testdb > /mweb/postgresql/testdb.dmp
 pg_dump -U postgres  testdb > d:/testdb.dmp
 »Ö¸´Êý¾Ý¿â£º
-psql -U postgres testdb < d:/testdb.dmp
+psql -U dbuser  testdb > /mweb/postgresql/testdb.dm
