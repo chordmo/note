@@ -1,4 +1,5 @@
 备份数据库：
+pg_dump -U dbuser  testdb > /mweb/postgresql/testdb.dmp
 pg_dump -U postgres  testdb > d:/testdb.dmp
 恢复数据库：
 psql -U postgres testdb < d:/testdb.dmp
