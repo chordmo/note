@@ -22,5 +22,22 @@ firewall-cmd --reload
 sudo adduser dbuser
 sudo su - postgres
 psql
+
+
+CREATE USER tom WITH PASSWORD 'tomPassword';
+CREATE DATABASE jerry;
+GRANT ALL PRIVILEGES ON DATABASE jerry to tom;
+\q
+su - tom
+psql -d jerry -U tom
+
+
+
+
+
+
+
+
+
 CREATE DATABASE testdb OWNER dbuser;
 GRANT ALL PRIVILEGES ON DATABASE testdb to dbuser;
