@@ -1,4 +1,4 @@
-yum localinstall https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+yum -y localinstall https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
 yum -y install postgresql95-server postgresql95-contrib
 /usr/pgsql-9.5/bin/postgresql95-setup initdb
 service postgresql-9.5 start/stop/restart/reload
@@ -10,9 +10,9 @@ ALTER USER postgres WITH PASSWORD 'postgres';
 su root 
 
 vi /var/lib/pgsql/9.5/data/postgresql.conf
-//½«listen_addressesÇ°µÄ#È¥µô£¬²¢½« listen_addresses = 'localhost' ¸Ä³É listen_addresses = '*'£»
+//å°†listen_addresseså‰çš„#å»æ‰ï¼Œå¹¶å°† listen_addresses = 'localhost' æ”¹æˆ listen_addresses = '*'ï¼›
 vi /var/lib/pgsql/9.5/data/pg_hba.conf
-//½«IPv4ÇøÏÂµÄ127.0.0.1/32ĞŞ¸ÄÎª0.0.0.0/0£» ½«identĞŞ¸ÄÎªmd5 
+//å°†IPv4åŒºä¸‹çš„127.0.0.1/32ä¿®æ”¹ä¸º0.0.0.0/0ï¼› å°†identä¿®æ”¹ä¸ºmd5 
 service postgresql-9.5 restart
 systemctl start firewalld
 firewall-cmd --zone=public --add-port=5432/tcp --permanent
