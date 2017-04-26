@@ -7,12 +7,17 @@ su postgres
 psql
 ALTER USER postgres WITH PASSWORD 'postgres';
 \q
-su root 
 
+
+su root 
 vi /var/lib/pgsql/9.5/data/postgresql.conf
 //将listen_addresses前的#去掉，并将 listen_addresses = 'localhost' 改成 listen_addresses = '*'；
+
+
 vi /var/lib/pgsql/9.5/data/pg_hba.conf
 //将IPv4区下的127.0.0.1/32修改为0.0.0.0/0； 将ident修改为md5 
+
+
 service postgresql-9.5 restart
 systemctl start firewalld
 firewall-cmd --zone=public --add-port=5432/tcp --permanent
@@ -31,13 +36,3 @@ GRANT ALL PRIVILEGES ON DATABASE jerry to tom;
 su - tom
 psql -d jerry -U tom
 
-
-
-
-
-
-
-
-
-CREATE DATABASE testdb OWNER dbuser;
-GRANT ALL PRIVILEGES ON DATABASE testdb to dbuser;
