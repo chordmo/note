@@ -21,5 +21,6 @@ firewall-cmd --reload
 
 sudo adduser dbuser
 sudo su - postgres
+psql
 CREATE DATABASE testdb OWNER dbuser;
 GRANT ALL PRIVILEGES ON DATABASE testdb to dbuser;
