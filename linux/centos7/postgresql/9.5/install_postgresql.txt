@@ -22,17 +22,20 @@ service postgresql-9.5 restart
 systemctl start firewalld
 firewall-cmd --zone=public --add-port=5432/tcp --permanent
 firewall-cmd --zone=public --add-service=postgresql --permanent
-firewall-cmd --reload
+firewall-cmd --reloadex
 
 sudo adduser dbuser
 sudo su - postgres
 psql
 
-
-CREATE USER tom WITH PASSWORD 'tomPassword';
-CREATE DATABASE jerry;
-GRANT ALL PRIVILEGES ON DATABASE jerry to tom;
+adduser tom
+passwd tom
+sudo su - postgres
+psql -d template1 -U postgres
+CREATE USER tom WITH PASSWORD 'tom';
+CREATE DATABASE jerrydb;
+GRANT ALL PRIVILEGES ON DATABASE jerrydb to tom;
 \q
 su - tom
-psql -d jerry -U tom
+psql -d jerrydb -U tom
 
