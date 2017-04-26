@@ -1,0 +1,3 @@
+https://www.java.com/zh_CN/download/manual.jsp
+
+rpm -ivh jre-8u73-linux-i586.rpm
