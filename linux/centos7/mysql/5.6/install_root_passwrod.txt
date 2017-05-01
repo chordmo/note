@@ -8,7 +8,10 @@ sudo systemctl status mysqld
 
 sudo mysql_secure_installation
 
-
+systemctl start firewalld
+firewall-cmd --zone=public --add-port=3306/tcp --permanent
+firewall-cmd --zone=public --add-service=postgresql --permanent
+firewall-cmd --reloadex
 
 service mysqld stop
 mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
