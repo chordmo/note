@@ -13,40 +13,34 @@ firewall-cmd --zone=public --add-port=3306/tcp --permanent
 firewall-cmd --zone=public --add-service=postgresql --permanent
 firewall-cmd --reloadex
 
-service mysqld stop
-mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
+1. Stop mysql:
+systemctl stop mysqld
+
+2. Set the mySQL environment option 
+systemctl set-environment MYSQLD_OPTS="--skip-grant-tables"
+
+3. Start mysql usig the options you just set
+systemctl start mysqld
+
+4. Login as root
 mysql -u root
-Setup new MySQL root user password,use mysql;
+
+5. Update the root user password with these mysql commands
+mysql> UPDATE mysql.user SET authentication_string = PASSWORD('rootroot') WHERE User = 'root' AND Host = 'localhost';
+mysql> FLUSH PRIVILEGES;
+mysql> quit
+
+6. Stop mysql
+systemctl stop mysqld
+
+7. Unset the mySQL envitroment option so it starts normally next time
+systemctl unset-environment MYSQLD_OPTS
+
+8. Start mysql normally:
+systemctl start mysqld
+
+Try to login using your new password:
+7. mysql -u root -p
 
 
-select user,host,password from mysql.user;
-    +------+-----------+-------------------------------------------+
-    | user | host      | password                                  |
-    +------+-----------+-------------------------------------------+
-    | root | localhost | *CF1E6A25C954B638A451D6|
-    | root | centos64  |                                           |
-    | root | 127.0.0.1 |                                           |
-    |      | localhost |                                           |
-    |      | centos64  |                                           |
-    +------+-----------+-------------------------------------------+
-    
-update mysql.user set password=PASSWORD("***********") where User='root';
-
-select user,host,password from mysql.user;
-    +------+-----------+-------------------------------------------+
-    | user | host      | password                                  |
-    +------+-----------+-------------------------------------------+
-    | root | localhost | *CF1E6A25C954B638A451D6 |
-    | root | centos64  | *CF1E6A25C954B638A451D6|
-    | root | 127.0.0.1 | *CF1E6A25C954B638A451D6|
-    |      | localhost |                                           |
-    |      | centos64  |                                           |
-    +------+-----------+-------------------------------------------+
-
-flush privileges;
-quit
-
-5) Stop MySQL Server: service mysqld stop
-
-6) Start MySQL server and test it: 
-service mysqld start
+SET PASSWORD = PASSWORD('rootroot');
