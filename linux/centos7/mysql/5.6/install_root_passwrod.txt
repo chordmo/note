@@ -1,7 +1,21 @@
-1) service mysqld stop
-2) mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
-3) mysql -u root
-4) Setup new MySQL root user password,use mysql;
+wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+sudo rpm -ivh mysql57-community-release-el7-9.noarch.rpm
+sudo yum install mysql-server
+
+sudo systemctl start mysqld
+
+sudo systemctl status mysqld
+
+sudo mysql_secure_installation
+
+
+
+service mysqld stop
+mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
+mysql -u root
+Setup new MySQL root user password,use mysql;
+
+
 select user,host,password from mysql.user;
     +------+-----------+-------------------------------------------+
     | user | host      | password                                  |
