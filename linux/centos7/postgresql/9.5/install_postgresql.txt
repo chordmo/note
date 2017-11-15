@@ -41,3 +41,13 @@ GRANT ALL PRIVILEGES ON DATABASE jerrydb to tom;
 su - tom
 psql -d jerrydb -U tom
 
+
+
+sudo su - postgres
+
+psql -d template1 -U postgres
+
+ALTER USER tom WITH ENCRYPTED PASSWORD 'tom_666';
+
+
+
