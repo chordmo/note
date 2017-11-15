@@ -43,10 +43,10 @@ psql -d jerrydb -U tom
 
 
 
+
+#修改密码
 sudo su - postgres
-
 psql -d template1 -U postgres
-
 ALTER USER tom WITH ENCRYPTED PASSWORD 'tom_666';
 
 
