@@ -26,10 +26,6 @@ psql
 ALTER USER postgres WITH PASSWORD 'postgres';
 \q
 
-sudo adduser dbuser
-sudo su - postgres
-psql
-
 adduser tom
 passwd tom
 sudo su - postgres
